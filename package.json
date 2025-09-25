@@ -1,0 +1,88 @@
+{
+    "name": "@chriscrat/eslint-config",
+    "version": "1.0.0",
+    "description": "Professional, extensible ESLint configuration with multi-language support",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Chriscrat/eslint-config.git",
+        "directory": "packages/eslint-config"
+    },
+    "homepage": "https://github.com/Chriscrat/eslint-config#readme",
+    "bugs": {
+        "url": "https://github.com/Chriscrat/eslint-config/issues"
+    },
+    "keywords": [
+        "eslint",
+        "eslintconfig",
+        "config",
+        "typescript",
+        "react",
+        "vue",
+        "svelte",
+        "angular",
+        "nextjs",
+        "nestjs",
+        "nodejs",
+        "python",
+        "json",
+        "yaml",
+        "prettier",
+        "code-quality",
+        "extensible",
+        "configurable",
+        "lazy-loading",
+        "modular"
+    ],
+    "author": "Your Name <your.email@example.com>",
+    "license": "MIT",
+    "scripts": {
+        "prepublishOnly": "echo 'Ready to publish eslint-config!'",
+        "publish:patch": "npm version patch && npm publish --access public",
+        "publish:minor": "npm version minor && npm publish --access public",
+        "publish:major": "npm version major && npm publish --access public"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "peerDependencies": {
+        "eslint": "^9.0.0",
+        "@eslint/js": "^9.0.0",
+        "typescript": "^5.0.0",
+        "@typescript-eslint/eslint-plugin": "^8.0.0",
+        "@typescript-eslint/parser": "^8.0.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "prettier": "^3.0.0",
+        "typescript-eslint": "^8.0.0",
+        "globals": "^16.0.0"
+    },
+    "peerDependenciesOptional": {
+        "typescript-eslint": "^8.0.0",
+        "globals": "^16.0.0",
+        "eslint-plugin-vue": "^9.0.0",
+        "vue-eslint-parser": "^9.0.0",
+        "eslint-plugin-svelte": "^2.0.0",
+        "svelte-eslint-parser": "^0.33.0",
+        "@angular-eslint/eslint-plugin": "^18.0.0",
+        "@angular-eslint/eslint-plugin-template": "^18.0.0",
+        "eslint-plugin-json": "^4.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "files": [
+        "index.js",
+        "base.js",
+        "react.js",
+        "node.js",
+        "vue.js",
+        "svelte.js",
+        "angular.js",
+        "python.js",
+        "data.js",
+        "configurable.js",
+        "prettier.config.js",
+        "README.md",
+        "CHANGELOG.md"
+    ]
+}
