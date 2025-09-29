@@ -25,6 +25,13 @@ function createNodeConfig() {
                     "@typescript-eslint/no-explicit-any": "off",
                     "@typescript-eslint/no-floating-promises": "warn",
                     "@typescript-eslint/no-unsafe-argument": "warn",
+                    // Fix indentation conflicts with TypeScript decorators (NestJS, etc.)
+                    "indent": ["error", 4, {
+                        "ignoredNodes": [
+                            "PropertyDefinition[decorators.length > 0] > .key",
+                            "TSPropertySignature"
+                        ]
+                    }],
                 },
             },
             {
