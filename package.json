@@ -1,6 +1,6 @@
 {
     "name": "@chriscrat/eslint-config",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Professional, extensible ESLint configuration with multi-language support",
     "main": "index.js",
     "repository": {
