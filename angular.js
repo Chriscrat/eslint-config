@@ -3,13 +3,25 @@ const baseConfig = require("./base");
 // Lazy-load Angular dependencies only when needed
 function createAngularConfig() {
     try {
-        const angularEslint = require("@angular-eslint/eslint-plugin");
-        const angularTemplateEslint = require("@angular-eslint/eslint-plugin-template");
+        const angular = require("angular-eslint");
         const tseslint = require("typescript-eslint");
-        
+
         return [
-            ...baseConfig,
-            ...tseslint.configs.recommendedTypeChecked,
+            // Global-only entries (e.g. `ignores`) must stay unscoped, everything
+            // else is JS/TS-oriented and must not leak onto Angular template files.
+            ...baseConfig.map(config =>
+                "ignores" in config && Object.keys(config).length === 1
+                    ? config
+                    : { ...config, files: ["**/*.ts"] }
+            ),
+            ...tseslint.configs.recommendedTypeChecked.map(config => ({
+                ...config,
+                files: ["**/*.ts"],
+            })),
+            ...angular.configs.tsRecommended.map(config => ({
+                ...config,
+                files: ["**/*.ts"],
+            })),
             {
                 files: ["**/*.ts"],
                 languageOptions: {
@@ -17,11 +29,8 @@ function createAngularConfig() {
                         projectService: true,
                     },
                 },
-                plugins: {
-                    "@angular-eslint": angularEslint,
-                },
+                processor: angular.processInlineTemplates,
                 rules: {
-                    ...angularEslint.configs.recommended.rules,
                     "@angular-eslint/directive-selector": [
                         "error",
                         {
@@ -40,20 +49,15 @@ function createAngularConfig() {
                     ],
                 },
             },
-            {
+            ...angular.configs.templateRecommended.map(config => ({
+                ...config,
                 files: ["**/*.html"],
-                plugins: {
-                    "@angular-eslint/template": angularTemplateEslint,
-                },
-                rules: {
-                    ...angularTemplateEslint.configs.recommended.rules,
-                },
-            },
+            })),
         ];
     } catch (error) {
         throw new Error(
-            'Angular support requires "@angular-eslint/eslint-plugin", "@angular-eslint/eslint-plugin-template", and "typescript-eslint" to be installed.\n' +
-            'Install them with: pnpm add -D @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template typescript-eslint'
+            'Angular support requires "angular-eslint" and "typescript-eslint" to be installed.\n' +
+            'Install them with: pnpm add -D angular-eslint typescript-eslint'
         );
     }
 }
